@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <!-- Definizione dell'appender per il file di log -->
+  <appender name="fileAppender" class="ch.qos.logback.core.FileAppender">
+    <file>logs/briscola.log</file>
+    <append>false</append>
+    <encoder>
+      <pattern>%d [%t] %-5p %m%n</pattern>
+    </encoder>
+  </appender>
+  <logger name="org.kie.dmn" level="INFO">
+    <appender-ref ref="fileAppender" />
+  </logger>
+
+  <!-- Livello di root logging -->
+  <root level="INFO">
+    <appender-ref ref="fileAppender" />
+  </root>
+</configuration>

@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://kiegroup.org/dmn/_07F45EE0-E44C-4AA1-9F31-21AD46146042" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_18B7CFF2-BC4F-4F14-8DCD-AE50F447C998" name="Briscola" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://kiegroup.org/dmn/_07F45EE0-E44C-4AA1-9F31-21AD46146042">
+  <dmn:extensionElements/>
+  <dmn:itemDefinition id="_250B8999-E8A7-4A19-8CDA-47C5000CAA45" name="Turno" isCollection="false">
+    <dmn:itemComponent id="_66F162DB-AE4F-4953-8DDB-8AC825B49878" name="carta2" isCollection="false">
+      <dmn:typeRef>Carta</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_177E406B-03DB-470C-980F-6A79518E0F95" name="carta1" isCollection="false">
+      <dmn:typeRef>Carta</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_C27BB60E-2273-4DDE-A8EF-BEB6B0CB355A" name="briscola" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_61EE8137-E96F-4E61-8BC5-21291F06741F" name="Carta" isCollection="false">
+    <dmn:itemComponent id="_06133B6D-A52F-4729-B995-707AFA341392" name="seme" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+      <dmn:allowedValues kie:constraintType="enumeration" id="_86504CA3-C647-4B01-96AC-0D88E1E017B7">
+        <dmn:text>"Cuori", "Fiori", "Picche", "Quadri"</dmn:text>
+      </dmn:allowedValues>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_697F7060-0881-4019-9C27-03EAAEFB36BD" name="punti" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_E2B27289-0FB6-461E-989E-5ADC2913C8D1" name="valore" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+      <dmn:allowedValues kie:constraintType="enumeration" id="_1965FB02-B4EF-49F3-A9D9-43BA96A7D3C2">
+        <dmn:text>"A", "3", "K", "Q", "J", "7", "6", "5", "4", "2"</dmn:text>
+      </dmn:allowedValues>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_243554AA-7910-4AC8-806B-3242A2ABE728" name="Giocatore" isCollection="false">
+    <dmn:itemComponent id="_1A2A077D-5CC9-4A2D-BA1E-68BCF651D0CF" name="punti" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_E245C380-8854-42B5-A718-954F149A62F8" name="nome" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_AED40A8A-0183-40E8-84D9-AFEBBCF4F020" name="mano" isCollection="true">
+      <dmn:typeRef>Carta</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_573E6DDF-3A94-438A-B5D4-6B0B48358AC8" name="tConfontoBriscolaSeme" isCollection="false">
+    <dmn:itemComponent id="_D67D5C16-9662-4C66-9671-ACB7C1A107AB" name="carta1" isCollection="false">
+      <dmn:typeRef>boolean</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_12A1CBEA-8F4D-4152-B858-F865E99CA79D" name="carta2" isCollection="false">
+      <dmn:typeRef>boolean</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:decision id="_C24703F9-D801-4447-8D75-F9670C2E6EE2" name="Vincitore turno">
+    <dmn:extensionElements/>
+    <dmn:variable id="_3721C357-9387-44F5-992D-48804E9B1AF8" name="Vincitore turno" typeRef="Giocatore"/>
+    <dmn:informationRequirement id="_6407FC61-0A45-4AF2-9AAE-4059FA87C3FA">
+      <dmn:requiredInput href="#_861E63D1-6DD9-4575-94E8-6632492E32ED"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_14F2388C-5E47-449B-8409-9B3116414BDA">
+      <dmn:requiredDecision href="#_0345CD70-0908-4EB5-A42F-D99EAF781F51"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_12EDFCF3-1656-40EE-A51D-3352C76BDA92">
+      <dmn:requiredInput href="#_D8F5B083-7008-4806-AED6-FC6EF456D092"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_397FC4BF-BAE2-4FA7-A9FF-ED744E2728B9">
+      <dmn:requiredDecision href="#_3174733A-3E58-4CA5-B1F0-A192C095C168"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_D0F577D6-E750-408C-A9DC-057E80122379">
+      <dmn:requiredDecision href="#_54378229-3B55-4234-B508-B1B9F496291A"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_303996B7-A36C-4090-A08D-21C8B4DFDD88">
+      <dmn:requiredInput href="#_DE7FAE25-8A05-45F3-BA97-9130DEFE589A"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_9BE60C42-1619-4321-A08C-9B7F9C6A3C4F" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_257CF35B-6626-40FB-9D6F-C91E373DCA42">
+        <dmn:inputExpression id="_2178418E-81F2-4344-B94F-644C99943E41" typeRef="boolean">
+          <dmn:text>Confronto seme carte</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_DC734560-1063-4B8C-B2AC-50E71340CE71">
+        <dmn:inputExpression id="_B512B572-C146-41C2-B4F3-740DA39AE6F5" typeRef="number">
+          <dmn:text>Confronto valore carte</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_D3BE69B4-8E02-4B3C-8333-3DAE1D7E38E7">
+        <dmn:inputExpression id="_CBA31595-26D1-46A7-888A-CD5CB2018055" typeRef="boolean">
+          <dmn:text>Confronto briscola seme.carta1</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_A6B74A83-371D-49EF-8284-D27014CE3E35">
+        <dmn:inputExpression id="_EE85E032-3867-4362-B44C-0CC483840908" typeRef="boolean">
+          <dmn:text>Confronto briscola seme.carta2</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_097E6CA3-2D5A-4F85-B72B-0B9D173442B5" name="mano" typeRef="Any"/>
+      <dmn:output id="_ED07DFF8-D1D3-464D-8DE5-CC9BB41BBB69" name="nome" typeRef="string"/>
+      <dmn:output id="_82F5DE06-DE30-4502-A60B-E4341A90C8DF" name="punti" typeRef="number"/>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_FABC846E-B9D4-49F7-9900-DF52EECA4708">
+        <dmn:inputEntry id="_D437EFFF-DC3D-4DCC-953B-17FDC109375F">
+          <dmn:text>true</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_5AC2207C-75C1-4D43-A483-AE0AA9BC54BC">
+          <dmn:text>&gt;0</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_FD716E65-A02A-40AC-AAA5-5EE9D469E482">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_44C79F9D-94DA-42E2-89AF-118B2291B8EE">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_AA38AA1E-D2A9-49BF-ABC2-7C419DD3069D">
+          <dmn:text>Giocatore1.mano</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_33B7F6B1-671D-42F9-B464-FCCB07A012B9">
+          <dmn:text>Giocatore1.nome</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_74C71354-F7BD-4F44-BF92-7ECEBC3B0BF4">
+          <dmn:text>Giocatore1.punti + Turno.carta1.punti + Turno.carta2.punti</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_835D15E8-A022-4529-A1A7-98EE386287DE">
+        <dmn:inputEntry id="_5EDCA3C0-1917-43A8-9DAE-A94E68911B39">
+          <dmn:text>false</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_A9CFB806-DC62-48F6-B3FA-0818C2474C6D">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_FFB64E74-98B6-4867-B4BF-4600A8908BA7">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_D33ADA20-CC40-4191-9F5C-B65857C7B80D">
+          <dmn:text>false</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_2B5AA2C1-0107-49EE-B89A-D5905BA19D42">
+          <dmn:text>Giocatore1.mano</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_57F19732-9BD6-4C41-985C-B4442BD9E5D6">
+          <dmn:text>Giocatore1.nome</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_DA37D92C-D0D0-4CBD-81D3-171CD492162A">
+          <dmn:text>Giocatore1.punti + Turno.carta1.punti + Turno.carta2.punti</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_45EC706B-FF0B-4EFD-870F-5950247C294F">
+        <dmn:inputEntry id="_9CCCC63F-737B-4383-8FE2-C23DB5D386FB">
+          <dmn:text>true </dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_DAC25A4C-A60C-4982-99D9-4901B5E29CF2">
+          <dmn:text>&lt;0</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_77A8E594-8153-4E1A-85D5-69BCA6F4FE9E">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_1827C21C-1EF4-4A7B-A47A-524FD2B9BAF3">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_53C1FFBE-A3EC-48C9-A899-1F28AAFAFE30">
+          <dmn:text>Giocatore2.mano</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_FFE33D1F-4F05-4834-B101-2820E246644C">
+          <dmn:text>Giocatore2.nome</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_E40EA225-B6D4-4C8A-B124-1AFD1236BF68">
+          <dmn:text>Giocatore2.punti + Turno.carta1.punti + Turno.carta2.punti</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_0798F44B-9146-4CF9-B8E2-74A993585864">
+        <dmn:inputEntry id="_EC8F1762-4F23-4E09-8729-54E157CCA0E6">
+          <dmn:text>false</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_68B8168C-6892-4E12-9FB0-52A05D0AB89E">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_2D6CA51D-A4B3-4F8C-BC53-5C71D9003AF5">
+          <dmn:text>false</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_3DCD88A4-2995-4059-AFAD-0CFD662F4ED5">
+          <dmn:text>true</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_119B1699-112D-45E5-8B07-FD8C5C269E94">
+          <dmn:text>Giocatore2.mano</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_F6560F4D-4FF7-422C-8248-B0FB0202BA4F">
+          <dmn:text>Giocatore2.nome</dmn:text>
+        </dmn:outputEntry>
+        <dmn:outputEntry id="_2CC41BCB-D9A9-4DA6-83DE-17649E8AD014">
+          <dmn:text>Giocatore2.punti + Turno.carta1.punti + Turno.carta2.punti</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:inputData id="_D8F5B083-7008-4806-AED6-FC6EF456D092" name="Turno">
+    <dmn:extensionElements/>
+    <dmn:variable id="_6CE8D98B-C2C0-480D-9BDE-8D904D198D24" name="Turno" typeRef="Turno"/>
+  </dmn:inputData>
+  <dmn:inputData id="_DE7FAE25-8A05-45F3-BA97-9130DEFE589A" name="Giocatore1">
+    <dmn:extensionElements/>
+    <dmn:variable id="_40C136F9-EC42-4BE2-8A30-E5B8846F46DE" name="Giocatore1" typeRef="Giocatore"/>
+  </dmn:inputData>
+  <dmn:inputData id="_861E63D1-6DD9-4575-94E8-6632492E32ED" name="Giocatore2">
+    <dmn:extensionElements/>
+    <dmn:variable id="_467CCD6F-BAC1-4094-8380-02373EE301B5" name="Giocatore2" typeRef="Giocatore"/>
+  </dmn:inputData>
+  <dmn:decision id="_87FC53ED-E01F-4FA6-AC1B-9E19ABF3857E" name="Esito partita">
+    <dmn:extensionElements/>
+    <dmn:variable id="_2A84D8D3-0E17-4E65-B395-B64CC7F62D7A" name="Esito partita" typeRef="string"/>
+    <dmn:informationRequirement id="_B72C6F35-CABD-4678-A7F0-7924965378EC">
+      <dmn:requiredInput href="#_DE7FAE25-8A05-45F3-BA97-9130DEFE589A"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_69BDD94B-5C46-4BE6-B993-999DE96B4F09">
+      <dmn:requiredInput href="#_861E63D1-6DD9-4575-94E8-6632492E32ED"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_088287E8-F68C-44F8-94AE-2208BAB7EF48">
+      <dmn:requiredDecision href="#_C24703F9-D801-4447-8D75-F9670C2E6EE2"/>
+    </dmn:informationRequirement>
+    <dmn:context id="_EBECEAC4-B1F2-4D54-B1C5-B9F090ABDAAC">
+      <dmn:contextEntry>
+        <dmn:variable id="_4B31CC25-BC21-4DFA-90FF-818F6175C888" name="Perdente turno" typeRef="Giocatore"/>
+        <dmn:literalExpression id="_578969EC-7722-4396-B155-3ED396045415">
+          <dmn:text>if (Vincitore turno.nome=Giocatore1.nome) then Giocatore2 else Giocatore1</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_2F71EE4E-86EF-456B-AEE1-090AFC76EEC8" name="Punti totali" typeRef="number"/>
+        <dmn:literalExpression id="_1D5780D8-644C-4027-B441-66F3D6C89278">
+          <dmn:text>Vincitore turno.punti + Perdente turno.punti</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:decisionTable id="_A64635EF-E57B-4AC7-A358-B7101F5BD234" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+          <dmn:input id="_D590C600-5BCF-4659-88DE-ABFA3465E10D">
+            <dmn:inputExpression id="_2CC277D6-344E-482E-A6DE-319FE22DE46D" typeRef="number">
+              <dmn:text>Vincitore turno.punti</dmn:text>
+            </dmn:inputExpression>
+          </dmn:input>
+          <dmn:input id="_9086F2C5-07D1-4E0B-9EB7-C7618D189D63">
+            <dmn:inputExpression id="_90AEBB86-3916-400F-B236-1257309683EC" typeRef="number">
+              <dmn:text>Perdente turno.punti</dmn:text>
+            </dmn:inputExpression>
+          </dmn:input>
+          <dmn:input id="_FA0FA1F8-359E-48E9-AE23-EFED3AC19063">
+            <dmn:inputExpression id="_E1959927-5298-4B29-84DE-09E29C8F5D4C" typeRef="number">
+              <dmn:text>Punti totali</dmn:text>
+            </dmn:inputExpression>
+          </dmn:input>
+          <dmn:output id="_EF10C9F7-31B0-4400-B4D5-0AF42E25CE06"/>
+          <dmn:annotation name="annotation-1"/>
+          <dmn:rule id="_88186CDA-DCBC-4F53-941A-3CB40784FF28">
+            <dmn:inputEntry id="_EBE85B3D-EAC6-4F21-AECE-3CC7C28A30B6">
+              <dmn:text>60</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_919FA0E8-2240-4A92-A736-30718F044230">
+              <dmn:text>60</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_2A38C334-6659-487E-9896-BC92AEF74B69">
+              <dmn:text>120</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_96495968-9712-4150-AC35-376D595C847D">
+              <dmn:text>"La partita è finita in pareggio"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_EC6BA11A-EC32-4440-AB65-55A6FCCDBE38">
+            <dmn:inputEntry id="_CC77D61C-C5A2-471B-B50B-FF1DF381698C">
+              <dmn:text>&gt;=61</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_79EE1C7F-F597-44C6-899F-9D10BDA7BD08">
+              <dmn:text>&lt;60</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_7680FDC9-AA70-4989-9159-04048C961708">
+              <dmn:text>120</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_E1E1705C-5236-4EDE-B975-BEF9A9400C49">
+              <dmn:text>"Ha vinto la partita "+Vincitore turno.nome</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_7F2EBF6F-7526-4651-886A-2DE84708589F">
+            <dmn:inputEntry id="_4733C3D2-EC9B-4487-87AB-94806FE04B0C">
+              <dmn:text>&lt;60</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_44F2120F-D75B-454F-9631-8FADA4C180ED">
+              <dmn:text>&gt;=61</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_3C42F85C-01AB-4D3A-B73D-3F8F98572B01">
+              <dmn:text>120</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_5B946728-D9D7-4FE7-987F-20F9FA11518F">
+              <dmn:text>"Ha vinto la partita "+ Perdente turno.nome</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_63CDEFBF-0D27-4CB9-97B9-6962428AEEC7">
+            <dmn:inputEntry id="_7A12FDF7-AAD1-4509-8964-078BC2E96FAF">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_11172587-C5D3-44B6-8CBB-91700FCE4D72">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_4DEB5867-F745-4B14-9E15-0726CA7981FA">
+              <dmn:text>&lt;120</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_CFA33C0E-925A-494F-A9A3-3AECD17B14F3">
+              <dmn:text>"La partita non è conclusa"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+        </dmn:decisionTable>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmn:decision id="_3174733A-3E58-4CA5-B1F0-A192C095C168" name="Confronto seme carte">
+    <dmn:extensionElements/>
+    <dmn:variable id="_AC0A8738-E5A2-4EED-88FB-694CBB34B9FF" name="Confronto seme carte" typeRef="boolean"/>
+    <dmn:informationRequirement id="_C20F8B28-6CB9-4765-AD5A-E410102B5744">
+      <dmn:requiredInput href="#_D8F5B083-7008-4806-AED6-FC6EF456D092"/>
+    </dmn:informationRequirement>
+    <dmn:literalExpression id="_CD31FD70-E8E7-48EC-9114-D0CC51489346">
+      <dmn:text>Turno.carta1.seme=Turno.carta2.seme</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:decision id="_0345CD70-0908-4EB5-A42F-D99EAF781F51" name="Confronto valore carte">
+    <dmn:extensionElements/>
+    <dmn:variable id="_E48C4A3C-F389-497D-9463-531F9802B240" name="Confronto valore carte" typeRef="number"/>
+    <dmn:informationRequirement id="_007D233B-8588-4616-B78E-DC7C0FC24A03">
+      <dmn:requiredInput href="#_D8F5B083-7008-4806-AED6-FC6EF456D092"/>
+    </dmn:informationRequirement>
+    <dmn:context id="_22DE959B-AD91-4DD6-BCD8-E49AC3F736E4">
+      <dmn:contextEntry>
+        <dmn:variable id="_1DB498AC-6CB8-4FF3-8A1A-94A6C864B5AB" name="Indice carta1" typeRef="number"/>
+        <dmn:literalExpression id="_33E5DF30-0E48-4D79-AB55-1D529004E4AA">
+          <dmn:text>index of(["2","4","5","6","7","J","Q","K","3","A"],Turno.carta1.valore)</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_A0BFA6A1-F033-4FA6-B49C-5093D364735B" name="Indice carta2" typeRef="number"/>
+        <dmn:literalExpression id="_43E29BE4-14F8-46A7-B8A9-95F8D50CF4D1">
+          <dmn:text>index of(["2","4","5","6","7","J","Q","K","3","A"],Turno.carta2.valore)</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:literalExpression id="_E5DBAB0E-0D08-45A6-A484-2E74E87A175B">
+          <dmn:text>Indice carta1-Indice carta2</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmn:decision id="_54378229-3B55-4234-B508-B1B9F496291A" name="Confronto briscola seme">
+    <dmn:extensionElements/>
+    <dmn:variable id="_742BC133-7C6D-4BD1-96D3-A86B2A2BFEC3" name="Confronto briscola seme" typeRef="tConfontoBriscolaSeme"/>
+    <dmn:informationRequirement id="_F84F6AF1-7946-4FED-8338-B00B6FCA8EE0">
+      <dmn:requiredInput href="#_D8F5B083-7008-4806-AED6-FC6EF456D092"/>
+    </dmn:informationRequirement>
+    <dmn:relation id="_F8328C1D-913D-4B44-B1E9-6E5B0159BE6D">
+      <dmn:column id="_7419EA59-EF2B-41F5-8B74-CB87F54EBDDD" name="carta1" typeRef="boolean"/>
+      <dmn:column id="_3EEC4741-76E0-4206-9FE2-20A4C126B142" name="carta2" typeRef="boolean"/>
+      <dmn:row id="_BB5ABB3B-EFD6-4902-906A-FFD8D118E57A">
+        <dmn:literalExpression id="_FD2834DF-7626-4276-A66B-28AF49A05701">
+          <dmn:text>Turno.briscola=Turno.carta1.seme</dmn:text>
+        </dmn:literalExpression>
+        <dmn:literalExpression id="_76B68E74-2D8C-497C-BBF2-82E1BA767E4E">
+          <dmn:text>Turno.briscola=Turno.carta2.seme</dmn:text>
+        </dmn:literalExpression>
+      </dmn:row>
+    </dmn:relation>
+  </dmn:decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_045172A7-FE1F-4548-B908-1F0C0F476910" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_9BE60C42-1619-4321-A08C-9B7F9C6A3C4F">
+            <kie:width>50</kie:width>
+            <kie:width>121</kie:width>
+            <kie:width>104</kie:width>
+            <kie:width>190</kie:width>
+            <kie:width>198</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>207</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_EBECEAC4-B1F2-4D54-B1C5-B9F090ABDAAC">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>851</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_578969EC-7722-4396-B155-3ED396045415">
+            <kie:width>851</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_1D5780D8-644C-4027-B441-66F3D6C89278">
+            <kie:width>851</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_A64635EF-E57B-4AC7-A358-B7101F5BD234">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>381</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_CD31FD70-E8E7-48EC-9114-D0CC51489346">
+            <kie:width>296</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_22DE959B-AD91-4DD6-BCD8-E49AC3F736E4">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>596</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_33E5DF30-0E48-4D79-AB55-1D529004E4AA">
+            <kie:width>596</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_43E29BE4-14F8-46A7-B8A9-95F8D50CF4D1">
+            <kie:width>596</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_E5DBAB0E-0D08-45A6-A484-2E74E87A175B">
+            <kie:width>596</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_F8328C1D-913D-4B44-B1E9-6E5B0159BE6D">
+            <kie:width>50</kie:width>
+            <kie:width>271</kie:width>
+            <kie:width>270</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_FD2834DF-7626-4276-A66B-28AF49A05701"/>
+          <kie:ComponentWidths dmnElementRef="_76B68E74-2D8C-497C-BBF2-82E1BA767E4E"/>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_C24703F9-D801-4447-8D75-F9670C2E6EE2" dmnElementRef="_C24703F9-D801-4447-8D75-F9670C2E6EE2" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="904" y="355" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_D8F5B083-7008-4806-AED6-FC6EF456D092" dmnElementRef="_D8F5B083-7008-4806-AED6-FC6EF456D092" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="902.2990654205607" y="576" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_DE7FAE25-8A05-45F3-BA97-9130DEFE589A" dmnElementRef="_DE7FAE25-8A05-45F3-BA97-9130DEFE589A" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="1178" y="574.3421052631579" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_861E63D1-6DD9-4575-94E8-6632492E32ED" dmnElementRef="_861E63D1-6DD9-4575-94E8-6632492E32ED" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="1308" y="576" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_87FC53ED-E01F-4FA6-AC1B-9E19ABF3857E" dmnElementRef="_87FC53ED-E01F-4FA6-AC1B-9E19ABF3857E" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="1178" y="205" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_3174733A-3E58-4CA5-B1F0-A192C095C168" dmnElementRef="_3174733A-3E58-4CA5-B1F0-A192C095C168" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="655" y="452" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_0345CD70-0908-4EB5-A42F-D99EAF781F51" dmnElementRef="_0345CD70-0908-4EB5-A42F-D99EAF781F51" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="817" y="452" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_54378229-3B55-4234-B508-B1B9F496291A" dmnElementRef="_54378229-3B55-4234-B508-B1B9F496291A" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="979" y="452" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_6407FC61-0A45-4AF2-9AAE-4059FA87C3FA" dmnElementRef="_6407FC61-0A45-4AF2-9AAE-4059FA87C3FA">
+        <di:waypoint x="1358" y="576"/>
+        <di:waypoint x="1004" y="380"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_14F2388C-5E47-449B-8409-9B3116414BDA" dmnElementRef="_14F2388C-5E47-449B-8409-9B3116414BDA">
+        <di:waypoint x="867" y="452"/>
+        <di:waypoint x="954" y="405"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_12EDFCF3-1656-40EE-A51D-3352C76BDA92" dmnElementRef="_12EDFCF3-1656-40EE-A51D-3352C76BDA92">
+        <di:waypoint x="952.2990654205607" y="601"/>
+        <di:waypoint x="952.3018636767105" y="475.86620164261285"/>
+        <di:waypoint x="954" y="405"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_397FC4BF-BAE2-4FA7-A9FF-ED744E2728B9" dmnElementRef="_397FC4BF-BAE2-4FA7-A9FF-ED744E2728B9">
+        <di:waypoint x="705" y="477"/>
+        <di:waypoint x="904" y="380"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_D0F577D6-E750-408C-A9DC-057E80122379" dmnElementRef="_D0F577D6-E750-408C-A9DC-057E80122379">
+        <di:waypoint x="1029" y="452"/>
+        <di:waypoint x="954" y="405"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_303996B7-A36C-4090-A08D-21C8B4DFDD88-AUTO-SOURCE" dmnElementRef="_303996B7-A36C-4090-A08D-21C8B4DFDD88">
+        <di:waypoint x="1228" y="574.3421052631579"/>
+        <di:waypoint x="1004" y="380"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_B72C6F35-CABD-4678-A7F0-7924965378EC" dmnElementRef="_B72C6F35-CABD-4678-A7F0-7924965378EC">
+        <di:waypoint x="1228" y="599.3421052631579"/>
+        <di:waypoint x="1228" y="255"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_69BDD94B-5C46-4BE6-B993-999DE96B4F09" dmnElementRef="_69BDD94B-5C46-4BE6-B993-999DE96B4F09">
+        <di:waypoint x="1358" y="576"/>
+        <di:waypoint x="1228" y="255"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_088287E8-F68C-44F8-94AE-2208BAB7EF48-AUTO-TARGET" dmnElementRef="_088287E8-F68C-44F8-94AE-2208BAB7EF48">
+        <di:waypoint x="954" y="355"/>
+        <di:waypoint x="1228" y="255"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_C20F8B28-6CB9-4765-AD5A-E410102B5744-AUTO-SOURCE-AUTO-TARGET" dmnElementRef="_C20F8B28-6CB9-4765-AD5A-E410102B5744">
+        <di:waypoint x="952.2990654205607" y="576"/>
+        <di:waypoint x="705" y="502"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_007D233B-8588-4616-B78E-DC7C0FC24A03-AUTO-TARGET" dmnElementRef="_007D233B-8588-4616-B78E-DC7C0FC24A03">
+        <di:waypoint x="952.2990654205607" y="576"/>
+        <di:waypoint x="867" y="452"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_F84F6AF1-7946-4FED-8338-B00B6FCA8EE0-AUTO-TARGET" dmnElementRef="_F84F6AF1-7946-4FED-8338-B00B6FCA8EE0">
+        <di:waypoint x="952.2990654205607" y="576"/>
+        <di:waypoint x="1029" y="452"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>

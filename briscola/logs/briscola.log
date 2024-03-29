@@ -1,0 +1,7 @@
+2024-03-29 09:31:01,671 [main] INFO  Found kmodule: file:/C:/Users/Giacomo/Desktop/workspace/briscola/target/classes/META-INF/kmodule.xml
+2024-03-29 09:31:02,311 [main] WARN  Unable to find pom.properties in /C:/Users/Giacomo/Desktop/workspace/briscola/target/classes
+2024-03-29 09:31:02,311 [main] INFO  Recursed up folders, found and used pom.xml C:\Users\Giacomo\Desktop\workspace\briscola\pom.xml
+2024-03-29 09:31:02,327 [main] INFO  Creating KieModule for artifact com.example:briscola:1.0-SNAPSHOT
+2024-03-29 09:31:02,343 [main] INFO  Artifact com.example:briscola:1.0-SNAPSHOT has executable model
+2024-03-29 09:31:02,343 [main] INFO  Start creation of KieBase: defaultKieBase
+2024-03-29 09:31:04,014 [main] INFO  End creation of KieBase: defaultKieBase

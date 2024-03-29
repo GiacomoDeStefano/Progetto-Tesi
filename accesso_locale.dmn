@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://kiegroup.org/dmn/_A422419A-6EC8-40B1-BE9C-D650E617A7BD" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_05B27C15-3AE2-45DF-AEC4-1AD8B9BE9B5C" name="accesso_locale" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://kiegroup.org/dmn/_A422419A-6EC8-40B1-BE9C-D650E617A7BD">
+  <dmn:extensionElements/>
+  <dmn:itemDefinition id="_026DCD4B-74F7-4E75-94D9-298624C5A9A8" name="Locale" isCollection="false">
+    <dmn:itemComponent id="_152B5C8F-75A1-4137-B18D-3492D3BD55D7" name="nome" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+      <dmn:allowedValues kie:constraintType="enumeration" id="_630E363A-48E2-4544-98FE-21BE74FDAAA3">
+        <dmn:text>"Segreteria", "Contabilità", "Magazzino", "Garage"</dmn:text>
+      </dmn:allowedValues>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_BCF4CEA8-5E77-489A-8B94-34019E5747A5" name="orario apertura" isCollection="false">
+      <dmn:typeRef>time</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_8815747C-36C7-4AB7-8C18-DF7D2F9B401A" name="orario chiusura" isCollection="false">
+      <dmn:typeRef>time</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_26E6EFA0-D76E-4995-B2DF-EBD862309B3B" name="giorni di chiusura" isCollection="true">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_3D2C7B6F-1303-431B-A37E-D85675F3F846" name="Richiedente" isCollection="false">
+    <dmn:itemComponent id="_06E94D5A-96CD-4009-9C9B-ED89C2951744" name="matricola" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_4AC3D23B-60EC-4254-BCBA-E9C172079ADB" name="ruolo" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+      <dmn:allowedValues kie:constraintType="enumeration" id="_03341C95-F9CA-4B0F-B808-C5632AB092A9">
+        <dmn:text>"Avvocato", "Contabile", "Magazziniere", "Segretario", "Autista", "Meccanico"</dmn:text>
+      </dmn:allowedValues>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_85AD7ED7-688C-46FA-A2DA-50E23F0E1DF5" name="anni di servizio" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_89CBFD97-5113-426E-B3C7-48AB064773CF" name="Richiesta" isCollection="false">
+    <dmn:itemComponent id="_F32D3D92-9C2F-486E-AB4D-79F940E87145" name="locale" isCollection="false">
+      <dmn:typeRef>Locale</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_3613F38A-0374-4E3A-98D9-A09FFD18482B" name="richiedente" isCollection="false">
+      <dmn:typeRef>Richiedente</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_D73FD6C2-BE39-4948-BB5F-4493E73FA7DF" name="orario d'accesso" isCollection="false">
+      <dmn:typeRef>time</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_2B35EFE0-09A2-4348-8742-05E4ABB47440" name="data d'accesso" isCollection="false">
+      <dmn:typeRef>date</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_0E8B4E9B-1AC0-48BE-80A7-3F04FEBDD852" name="amministratori" isCollection="true">
+    <dmn:typeRef>string</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:inputData id="_F873BA9B-2954-4DC9-9EFA-BEB717F63884" name="Richiesta">
+    <dmn:extensionElements/>
+    <dmn:variable id="_0BFAEEF5-3C91-4BA3-A368-902D4DE8CC7B" name="Richiesta" typeRef="Richiesta"/>
+  </dmn:inputData>
+  <dmn:decision id="_F02DD6FC-96D6-4B8D-A3F9-43C7F0EB5A7A" name="Controllo apertura locale">
+    <dmn:extensionElements/>
+    <dmn:variable id="_EEAD362E-CAF1-4AF6-8175-505DCF4A97A6" name="Controllo apertura locale" typeRef="string"/>
+    <dmn:informationRequirement id="_723149E7-74C7-4187-AF57-0F6E1C1A0C92">
+      <dmn:requiredInput href="#_F873BA9B-2954-4DC9-9EFA-BEB717F63884"/>
+    </dmn:informationRequirement>
+    <dmn:context id="_E937B9DD-4B9A-45AD-A952-6A916AA6671F">
+      <dmn:contextEntry>
+        <dmn:variable id="_AB462B36-9E04-4F7C-B9ED-59C1B002755C" name="Controllo orario" typeRef="boolean"/>
+        <dmn:literalExpression id="_A864C564-B021-4F00-8B4E-1CC614A34D77">
+          <dmn:text>(before(Richiesta.locale.orario apertura,Richiesta.orario d'accesso) and after (Richiesta.locale.orario chiusura, Richiesta.orario d'accesso))</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_01A0EB17-7B47-4B29-98F9-A42BF9766351" name="Controllo giorno" typeRef="boolean"/>
+        <dmn:literalExpression id="_4145BCD8-3F3B-4C43-9149-FE18794C0B93">
+          <dmn:text>list contains(Richiesta.locale.giorni di chiusura,day of week(Richiesta.data d'accesso))</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:literalExpression id="_2079E529-08FB-432D-8349-2AF7E070A358">
+          <dmn:text>if (Controllo orario and not(Controllo giorno)) then "Aperto" else "Chiuso"</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmn:decision id="_5B15DA66-EFC6-4F24-A1A4-2E372AE8CAE2" name="Controllo Ruolo Locale">
+    <dmn:extensionElements/>
+    <dmn:allowedAnswers>true  ,false</dmn:allowedAnswers>
+    <dmn:variable id="_D01AFB88-10E9-427D-9C28-871D797C5E38" name="Controllo Ruolo Locale" typeRef="boolean"/>
+    <dmn:informationRequirement id="_C8795CF0-233E-4B91-AAC8-080203D24857">
+      <dmn:requiredInput href="#_F873BA9B-2954-4DC9-9EFA-BEB717F63884"/>
+    </dmn:informationRequirement>
+    <dmn:authorityRequirement id="_244CF764-28E9-40CC-BC2E-95D62DEF4E1C">
+      <dmn:requiredAuthority href="#_4159F893-123E-49CE-A443-C55053A10E0C"/>
+    </dmn:authorityRequirement>
+    <dmn:decisionTable id="_0616F43A-F756-4C63-97D9-96402E13E00D" hitPolicy="PRIORITY" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_3683608D-2809-436B-B2BC-E204D5AC3DF7">
+        <dmn:inputExpression id="_05F25491-CED2-4157-A354-FCFCA1391F24" typeRef="string">
+          <dmn:text>Richiesta.locale.nome</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_3CFE5B9B-2F47-4018-B9C3-76C74B3A7023">
+        <dmn:inputExpression id="_FF84F08F-B308-466F-ADCD-5D26DC196444" typeRef="string">
+          <dmn:text>Richiesta.richiedente.ruolo</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_C2E50DD7-351E-4E4F-8248-F801EDC4AA21">
+        <dmn:outputValues id="_ED133942-3059-4277-BED1-C78E58AC71EF">
+          <dmn:text>true,false</dmn:text>
+        </dmn:outputValues>
+      </dmn:output>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_7E822FBB-54D6-4613-8BBC-13A0A9A3EA56">
+        <dmn:inputEntry id="_369832C5-CAC3-4362-AF9E-14F2462B1D25">
+          <dmn:text>"Segreteria"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_1BB6F52E-BD70-49AF-B642-C002AD15A307">
+          <dmn:text>"Segretario","Avvocato"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_84CA4D01-023B-47C6-AEAA-D5C5843B2CFC">
+          <dmn:text>true</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_955F5339-3BDA-475E-B5B0-F9AE42DC53BB">
+        <dmn:inputEntry id="_EAE05D43-1B15-4F20-B77F-2CB20D143576">
+          <dmn:text>"Contabilità"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_ED2B3797-0D7A-421F-8443-1E8FE5C97DE5">
+          <dmn:text>"Contabile","Segretario","Avvocato"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_020C18F0-A921-4381-B98D-34CF887BF929">
+          <dmn:text>true</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_56D38F18-BCC6-4234-965D-2D559BD20F39">
+        <dmn:inputEntry id="_D3406F81-DA96-4980-A1C2-B8CA09C0556B">
+          <dmn:text>"Magazzino"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_9ED263B4-D7F0-4601-BBB6-D913C7FF3936">
+          <dmn:text>"Magazziniere","Autista"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_83231705-EDFE-4193-B3D2-45DBC85BDDA6">
+          <dmn:text>true</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_FDCBE803-4870-4186-930D-458AFE0FB934">
+        <dmn:inputEntry id="_B708BC9A-DA28-4FD6-A6D2-B8AC3B154813">
+          <dmn:text>"Garage"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_5C11528D-469C-48BE-9297-0D6B6D9ECA7B">
+          <dmn:text>"Autista","Meccanico"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_054483D8-F619-476F-B9FD-5E977AF7FD18">
+          <dmn:text>true</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_32FB9DA8-75E5-48B4-905B-BFDCDF7B793E">
+        <dmn:inputEntry id="_F2E7979D-404F-4CB5-9E7A-1722C641B95F">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_35C7FBB9-C499-43B2-BF87-1EAE0E1EE998">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_FE63F09F-599E-4C50-9342-4E28BB21F358">
+          <dmn:text>false</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:decision id="_BE6F198B-A3F3-4EDD-93DA-A40E1E549E2E" name="Controllo Richiedente Amministratore">
+    <dmn:extensionElements/>
+    <dmn:variable id="_450E9386-8285-4763-AFA2-0C10F7CCE87B" name="Controllo Richiedente Amministratore" typeRef="boolean"/>
+    <dmn:informationRequirement id="_3692A5BC-30B9-4D5B-B25A-BA08254E8C6B">
+      <dmn:requiredInput href="#_F873BA9B-2954-4DC9-9EFA-BEB717F63884"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_97D78A28-213E-4F36-A73E-B916C22EED33">
+      <dmn:requiredInput href="#_4AE2C1A3-EF5D-4810-856D-115844C93258"/>
+    </dmn:informationRequirement>
+    <dmn:literalExpression id="_B6748AD3-2DC1-48C2-9767-C7783B227EA9">
+      <dmn:text>list contains(Lista amministratori,Richiesta.richiedente.matricola)</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:inputData id="_4AE2C1A3-EF5D-4810-856D-115844C93258" name="Lista amministratori">
+    <dmn:extensionElements/>
+    <dmn:variable id="_6AFB3C2A-7554-43EB-A7EB-983DD832A3D5" name="Lista amministratori" typeRef="amministratori"/>
+  </dmn:inputData>
+  <dmn:decision id="_ACCC3B4B-8768-42E0-B4BC-7D44DF2AB5E9" name="Accesso">
+    <dmn:extensionElements/>
+    <dmn:variable id="_034F67AF-8CEC-49A9-A63C-C5B2B1E69007" name="Accesso" typeRef="string"/>
+    <dmn:informationRequirement id="_80B90530-BDBD-4D5B-9F6F-E9C51DAAED55">
+      <dmn:requiredDecision href="#_F02DD6FC-96D6-4B8D-A3F9-43C7F0EB5A7A"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_87A4E9EE-21C4-4967-ABE9-065465FFFA6C">
+      <dmn:requiredDecision href="#_BE6F198B-A3F3-4EDD-93DA-A40E1E549E2E"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_C0AF4DDD-CC53-47E5-A8F9-21B3350C2CE7">
+      <dmn:requiredInput href="#_F873BA9B-2954-4DC9-9EFA-BEB717F63884"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_DC35AC03-B419-46DB-A455-C18B6F15F67C">
+      <dmn:requiredDecision href="#_5B15DA66-EFC6-4F24-A1A4-2E372AE8CAE2"/>
+    </dmn:informationRequirement>
+    <dmn:authorityRequirement id="_7577BBB7-E0C3-4AB3-8DA1-D16EEC57BFE8">
+      <dmn:requiredAuthority href="#_4159F893-123E-49CE-A443-C55053A10E0C"/>
+    </dmn:authorityRequirement>
+    <dmn:decisionTable id="_64F26AC5-B847-492D-BD80-E3C619127B02" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_8558A485-2596-44D5-9269-4B58E366095E">
+        <dmn:inputExpression id="_A72DCCD4-0158-488A-AEB4-4AE3501AC9F4" typeRef="string">
+          <dmn:text>Controllo apertura locale</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_9998952F-EED9-46A8-A860-85CEEEF13CA1">
+        <dmn:inputExpression id="_77A00942-6E55-4D5B-A670-B6E791D2DE61" typeRef="boolean">
+          <dmn:text>Controllo Ruolo Locale</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_3404E5D4-496B-4EE4-A8CA-3A85FE8A1A1B">
+        <dmn:inputExpression id="_3639B654-3BA8-4211-A95F-9B673110E662" typeRef="boolean">
+          <dmn:text>Controllo Richiedente Amministratore</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_86CED850-3182-497B-9F42-DD98A46DE133">
+        <dmn:inputExpression id="_0ABA39C4-29EF-4EFD-BED6-E9A1D14D32E4" typeRef="number">
+          <dmn:text>Richiesta.richiedente.anni di servizio</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_31B942E9-102C-422D-B81A-3974F599A437"/>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_A4BAAD7F-32C5-40B2-9A8C-5F19E69F2919">
+        <dmn:inputEntry id="_05F79CD1-A621-4EB1-88C4-12A4C43EF1F3">
+          <dmn:text>"Aperto"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_E43AA621-3879-4D04-94DF-E67F1A28AF91">
+          <dmn:text>true</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_89E54D1F-BE27-4F99-9096-4BD9D5AC3D82">
+          <dmn:text>false</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_CEC037ED-F661-4A64-988B-D516F3F5B9F2">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_10A3AA89-E781-410D-B60D-09033641D1B4">
+          <dmn:text>"Consentito"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_28357DF0-62B5-4098-AB46-8773661ECF1E">
+        <dmn:inputEntry id="_25EECD76-E2B4-4B60-8135-A4ECE93B765A">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_FD2A0707-6602-40A1-A5F7-82EBC18285C6">
+          <dmn:text>false</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_8435B044-2CA3-4CBB-B8DC-35E2C48B6FD8">
+          <dmn:text>false</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_95075258-24F7-4BC5-8312-52CEFF7DCAD5">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_9A080E06-23E9-4399-BA1E-37A8DA595DE3">
+          <dmn:text>"Negato"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_41B3E06E-E9C6-4461-9811-BE8F6CFFE449">
+        <dmn:inputEntry id="_242ECB09-A413-4356-B6E3-241C4498BBBE">
+          <dmn:text>"Chiuso"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_15FFFE60-735F-4994-8CB3-3FCFE46921CD">
+          <dmn:text>true</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_65ABC955-7134-4B8D-BF33-10BA01D67B24">
+          <dmn:text>false</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_E460E1F3-570D-4440-882D-E19656A7C41B">
+          <dmn:text>&gt;=5</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_11331341-E5F4-4142-981F-BA95735140A6">
+          <dmn:text>"Accesso con supervisore"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_999C7531-4575-40FA-9FDE-7F3185599366">
+        <dmn:inputEntry id="_0EC843D7-8AF9-4269-A532-56758CCD1912">
+          <dmn:text>"Chiuso"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_AB5D9AB8-6F0B-4F3E-9C77-71185A01D1A5">
+          <dmn:text>true</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_14B7612E-636B-4FAA-A170-CFFA445D81FF">
+          <dmn:text>false</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_39EB50EA-95AF-4997-9A66-6BC04DFD8CBF">
+          <dmn:text>&lt;5</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_A3436F53-4079-44A9-8A95-36699FBAFB54">
+          <dmn:text>"Negato"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_5625D2DB-03C9-498D-861A-7F272954D87B">
+        <dmn:inputEntry id="_C167C151-92F0-4753-927E-21883C2419DF">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_31097346-4EED-40BB-96D4-B25F531EDCC0">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_79B2AB89-5820-40F6-9CD1-74DEEFA874C0">
+          <dmn:text>true</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_5C1C5B3B-DF6C-49D3-8E02-07FA99DC9BA2">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_0FACE658-C9F1-43AD-BB4C-34F9E233292A">
+          <dmn:text>"Consentito"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:knowledgeSource id="_4159F893-123E-49CE-A443-C55053A10E0C" name="Regolamento aziendale" locationURI="">
+    <dmn:extensionElements/>
+    <dmn:type/>
+  </dmn:knowledgeSource>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_5F7FAB2E-ECBC-42E0-850A-0FB779402344" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_E937B9DD-4B9A-45AD-A952-6A916AA6671F">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>650</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_A864C564-B021-4F00-8B4E-1CC614A34D77">
+            <kie:width>650</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_4145BCD8-3F3B-4C43-9149-FE18794C0B93">
+            <kie:width>650</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_2079E529-08FB-432D-8349-2AF7E070A358">
+            <kie:width>650</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_0616F43A-F756-4C63-97D9-96402E13E00D">
+            <kie:width>50</kie:width>
+            <kie:width>151</kie:width>
+            <kie:width>214</kie:width>
+            <kie:width>151</kie:width>
+            <kie:width>105</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_B6748AD3-2DC1-48C2-9767-C7783B227EA9">
+            <kie:width>542</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_64F26AC5-B847-492D-BD80-E3C619127B02">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>299</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_F873BA9B-2954-4DC9-9EFA-BEB717F63884" dmnElementRef="_F873BA9B-2954-4DC9-9EFA-BEB717F63884" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="606" y="333" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_F02DD6FC-96D6-4B8D-A3F9-43C7F0EB5A7A" dmnElementRef="_F02DD6FC-96D6-4B8D-A3F9-43C7F0EB5A7A" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="366" y="202" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_5B15DA66-EFC6-4F24-A1A4-2E372AE8CAE2" dmnElementRef="_5B15DA66-EFC6-4F24-A1A4-2E372AE8CAE2" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="516.8272999999997" y="202.0457999999999" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_BE6F198B-A3F3-4EDD-93DA-A40E1E549E2E" dmnElementRef="_BE6F198B-A3F3-4EDD-93DA-A40E1E549E2E" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="725" y="201.6534999999999" width="132" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_4AE2C1A3-EF5D-4810-856D-115844C93258" dmnElementRef="_4AE2C1A3-EF5D-4810-856D-115844C93258" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="735" y="330.3173999999998" width="111" height="55"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_ACCC3B4B-8768-42E0-B4BC-7D44DF2AB5E9" dmnElementRef="_ACCC3B4B-8768-42E0-B4BC-7D44DF2AB5E9" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="595.8886999999997" y="52.70759999999996" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_4159F893-123E-49CE-A443-C55053A10E0C" dmnElementRef="_4159F893-123E-49CE-A443-C55053A10E0C" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="407.5981308411215" y="46" width="103" height="62"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_723149E7-74C7-4187-AF57-0F6E1C1A0C92" dmnElementRef="_723149E7-74C7-4187-AF57-0F6E1C1A0C92">
+        <di:waypoint x="656" y="333"/>
+        <di:waypoint x="416" y="252"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_C8795CF0-233E-4B91-AAC8-080203D24857" dmnElementRef="_C8795CF0-233E-4B91-AAC8-080203D24857">
+        <di:waypoint x="656" y="333"/>
+        <di:waypoint x="566.8272999999997" y="252.0457999999999"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_244CF764-28E9-40CC-BC2E-95D62DEF4E1C" dmnElementRef="_244CF764-28E9-40CC-BC2E-95D62DEF4E1C">
+        <di:waypoint x="459.0981308411215" y="108"/>
+        <di:waypoint x="566.8272999999997" y="202.0457999999999"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_3692A5BC-30B9-4D5B-B25A-BA08254E8C6B-AUTO-TARGET" dmnElementRef="_3692A5BC-30B9-4D5B-B25A-BA08254E8C6B">
+        <di:waypoint x="656" y="333"/>
+        <di:waypoint x="791" y="201.6534999999999"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_97D78A28-213E-4F36-A73E-B916C22EED33" dmnElementRef="_97D78A28-213E-4F36-A73E-B916C22EED33">
+        <di:waypoint x="790.5" y="357.8173999999998"/>
+        <di:waypoint x="791" y="251.6534999999999"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_80B90530-BDBD-4D5B-9F6F-E9C51DAAED55" dmnElementRef="_80B90530-BDBD-4D5B-9F6F-E9C51DAAED55">
+        <di:waypoint x="416" y="227"/>
+        <di:waypoint x="608" y="123"/>
+        <di:waypoint x="645.8886999999997" y="102.70759999999996"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_87A4E9EE-21C4-4967-ABE9-065465FFFA6C" dmnElementRef="_87A4E9EE-21C4-4967-ABE9-065465FFFA6C">
+        <di:waypoint x="791" y="226.6534999999999"/>
+        <di:waypoint x="645.8886999999997" y="102.70759999999996"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_C0AF4DDD-CC53-47E5-A8F9-21B3350C2CE7" dmnElementRef="_C0AF4DDD-CC53-47E5-A8F9-21B3350C2CE7">
+        <di:waypoint x="656" y="358"/>
+        <di:waypoint x="645.8886999999997" y="102.70759999999996"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_DC35AC03-B419-46DB-A455-C18B6F15F67C" dmnElementRef="_DC35AC03-B419-46DB-A455-C18B6F15F67C">
+        <di:waypoint x="566.8272999999997" y="227.0457999999999"/>
+        <di:waypoint x="645.8886999999997" y="102.70759999999996"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_7577BBB7-E0C3-4AB3-8DA1-D16EEC57BFE8" dmnElementRef="_7577BBB7-E0C3-4AB3-8DA1-D16EEC57BFE8">
+        <di:waypoint x="459.0981308411215" y="77"/>
+        <di:waypoint x="595.8886999999997" y="77.70759999999996"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>
