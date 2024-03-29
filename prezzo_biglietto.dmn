@@ -22,10 +22,10 @@
         <dmn:text>"Curva nord", "Curva sud", "Tribuna est", "Tribuna ovest"</dmn:text>
       </dmn:allowedValues>
     </dmn:itemComponent>
-    <dmn:itemComponent id="_144F33BD-2420-4681-A29F-E07C7A9E222A" name="prezzo base" isCollection="false">
+    <dmn:itemComponent id="_144F33BD-2420-4681-A29F-E07C7A9E222A" name="tariffa base" isCollection="false">
       <dmn:typeRef>number</dmn:typeRef>
     </dmn:itemComponent>
-    <dmn:itemComponent id="_7CA1EA9F-E24B-46BE-B9F6-974F100B4AAD" name="prezzo giorno partita" isCollection="false">
+    <dmn:itemComponent id="_7CA1EA9F-E24B-46BE-B9F6-974F100B4AAD" name="tariffa giorno partita" isCollection="false">
       <dmn:typeRef>number</dmn:typeRef>
     </dmn:itemComponent>
   </dmn:itemDefinition>
@@ -106,7 +106,7 @@
       <dmn:requiredInput href="#_739637C2-9EFA-4D63-9854-379169259827"/>
     </dmn:informationRequirement>
     <dmn:literalExpression id="_D2D491C7-B1EB-44E1-958C-B80298369CCB">
-      <dmn:text>if (Biglietto.data acquisizione=Biglietto.data partita) then Listino prezzi[settore=Biglietto.settore].tariffa giorno partita[1] else Listino prezzi[settore=Biglietto.settore].tariffa base[1]</dmn:text>
+      <dmn:text>if (Biglietto.data acquisizione=Biglietto.data partita) then Listino prezzi[settore=Biglietto.settore].tariffa giorno partita else Listino prezzi[settore=Biglietto.settore].tariffa base</dmn:text>
     </dmn:literalExpression>
   </dmn:decision>
   <dmn:decision id="_39DF1A15-6413-4C22-B218-F78E96DDB23C" name="Prezzo biglietto">
@@ -243,7 +243,7 @@
             <kie:width>100</kie:width>
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_D2D491C7-B1EB-44E1-958C-B80298369CCB">
-            <kie:width>742</kie:width>
+            <kie:width>745</kie:width>
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_42CF7807-1F15-46F2-A3B2-C10607F78836">
             <kie:width>1408</kie:width>
