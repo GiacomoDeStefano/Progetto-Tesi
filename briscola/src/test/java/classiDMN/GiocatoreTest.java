@@ -34,23 +34,6 @@ public class GiocatoreTest {
 
 	}
 
-	@Test
-	public void scegliCartaExceptionIndexOutOfBoundsExceptionTest() {
-		Carta cartaDaGiocare = new Carta("K", "Cuori", 4);
-		List<Carta> mano = new ArrayList<Carta>();
-		mano.add(new Carta("A", "Cuori", 11));
-		mano.add(new Carta("3", "Cuori", 10));
-		mano.add(cartaDaGiocare);
-		Giocatore giocatore = new Giocatore("GiocatoreTest", 10, mano);
-		try {
-			giocatore.scegliCarta(6);
-			fail("Errore: non si è sollevata l'eccezione");
-		} catch (IndexOutOfBoundsException e) {
-			assertNotNull(e);
-		} 
-
-	}
-
 
 	@Test
 	public void aggiungiCartaManoTest() {

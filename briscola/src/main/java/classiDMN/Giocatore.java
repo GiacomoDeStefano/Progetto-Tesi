@@ -43,7 +43,7 @@ public class Giocatore {
 				System.out.println(this.nome + " digita un numero tra 1 e "+ this.mano.size() +" per scegliere la carta dalla mano");
 				System.out.println(mano.toString());
 				int sceltaGiocatore1 = scelta.nextInt();
-				cartaScelta = scegliCarta((sceltaGiocatore1 - 1));
+				cartaScelta = mano.remove((sceltaGiocatore1 - 1));
 				ripeti_scelta = false;
 			} catch (IndexOutOfBoundsException | InputMismatchException e) {
 				System.out.println("Scelta non corretta: scegliere un numero tra 1 e " + this.mano.size());
@@ -53,12 +53,6 @@ public class Giocatore {
 
 		return cartaScelta;
 
-	}
-
-	Carta scegliCarta(int indexCarta) {
-		Carta c = mano.get(indexCarta);
-		mano.remove(indexCarta);
-		return c;
 	}
 
 }
