@@ -2,7 +2,7 @@
 Questo repository contiene il codice sorgente relativo agli esempi descritti nel progetto di tesi.
 
 Il progetto di tesi si è concentrato nell'implementazione delle Business logic di un'applicazione attraverso l'utilizzo di modelli decisionali standardizzati con la notazione DMN.
-Nel lavoro sono stati implementati tre esempi di utilizzo della notazione: due modelli decisionali e un applicazione java.
+Nel lavoro sono stati implementati tre esempi di utilizzo della notazione: due modelli decisionali e un applicazione Java.
 
 ## Esecuzione
 I modelli decisionali "accesso_locale" e "prezzo_biglietto" possono essere eseguiti nell'ambiente Kie Sandbox reperibile al seguente url: https://sandbox.kie.org/#/.
