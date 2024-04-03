@@ -1,5 +1,5 @@
-2024-03-30 16:37:13,631 [main] INFO  Found kmodule: jar:file:/C:/Users/Giacomo/Desktop/workspace/briscola/target/briscola-1.0-SNAPSHOT.jar!/META-INF/kmodule.xml
-2024-03-30 16:37:14,209 [main] INFO  Creating KieModule for artifact com.example:briscola:1.0-SNAPSHOT
-2024-03-30 16:37:14,928 [main] INFO  Artifact com.example:briscola:1.0-SNAPSHOT has executable model
-2024-03-30 16:37:14,944 [main] INFO  Start creation of KieBase: defaultKieBase
-2024-03-30 16:37:16,304 [main] INFO  End creation of KieBase: defaultKieBase
+2024-04-03 17:00:01,096 [main] INFO  Found kmodule: jar:file:/C:/Users/Giacomo/Desktop/workspace/briscola/target/briscola-1.0-SNAPSHOT.jar!/META-INF/kmodule.xml
+2024-04-03 17:00:01,846 [main] INFO  Creating KieModule for artifact com.example:briscola:1.0-SNAPSHOT
+2024-04-03 17:00:02,799 [main] INFO  Artifact com.example:briscola:1.0-SNAPSHOT has executable model
+2024-04-03 17:00:02,799 [main] INFO  Start creation of KieBase: defaultKieBase
+2024-04-03 17:00:04,565 [main] INFO  End creation of KieBase: defaultKieBase

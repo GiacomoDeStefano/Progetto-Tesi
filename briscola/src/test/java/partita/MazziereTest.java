@@ -18,19 +18,19 @@ public class MazziereTest {
 
 
 	@Test
-	public void mazzoTest() {
+	public void preparazioneMazzoTest() {
 		Mazziere mazziere = new Mazziere();
 		List<Carta> mazzo = mazziere.preparazioneMazzo();
-		List<String> nome = List.of("2", "4", "5", "6", "7", "J", "Q", "K", "3", "A");
+		List<String> valore = List.of("2", "4", "5", "6", "7", "J", "Q", "K", "3", "A");
 		assertEquals(40, mazzo.size());
 		assertEquals(40,mazzo.stream().distinct().count());
-		for (String nom : nome) {
+		for (String nom : valore) {
 			assertEquals(4, mazzo.stream().filter(c -> c.getValore() == nom).distinct().collect(Collectors.toList()).size());
 		}
 	}
 	
 	@Test
-	public void preparazioneMazzoTest() {
+	public void mazzoTest() {
 		Mazziere mazziere = new Mazziere();
 		List<Carta> mazzo = mazziere.preparazioneMazzo();;
 		ArrayDeque<Carta>mazzoMischiato =mazziere.mazzo();
